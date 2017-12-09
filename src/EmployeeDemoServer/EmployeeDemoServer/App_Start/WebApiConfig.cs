@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace EmployeeDemoServer
+namespace SimpleCode.EmployeeDemoServer
 {
     public static class WebApiConfig
     {

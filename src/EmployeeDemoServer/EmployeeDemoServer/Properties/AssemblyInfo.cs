@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных с этой сборкой.
-[assembly: AssemblyTitle("EmployeeDemoServer")]
+[assembly: AssemblyTitle("SimpleCode.EmployeeDemoServer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EmployeeDemoServer")]
+[assembly: AssemblyProduct("SimpleCode.EmployeeDemoServer")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
