@@ -43,7 +43,7 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            Employee employee = new CreateEmployeeCommand(dto.Name, dto.Email, dto.BirthDay, dto.Salary).Execute();
+            Employee employee = new CreateEmployeeCommand(dto.Name, dto.Email, dto.BirthDay, dto.Salary.Value).Execute();
             return CreatedAtRoute("GetEmployeeById", new { id = employee.Id }, employee);
         }
 
