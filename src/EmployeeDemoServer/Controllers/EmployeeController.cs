@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
+using SimpleCode.EmployeeDemoServer.Commands;
 using SimpleCode.EmployeeDemoServer.Dto;
 using SimpleCode.EmployeeDemoServer.Models;
 
@@ -32,7 +33,6 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
 
         [HttpPost]
         [Route("")]
-        // TODO: Pass CreateDto argument.
         public async Task<IHttpActionResult> Create(CreateEmployeeDto dto)
         {
             if (!ModelState.IsValid)
@@ -40,8 +40,7 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            // TODO: Create employee using command object.
-            Employee employee = null;
+            Employee employee = new CreateEmployeeCommand(dto.Name, dto.Email, dto.BirthDay, dto.Salary).Execute();
             return CreatedAtRoute("GetEmployeeById", new { id = employee.Id }, employee);
         }
 
