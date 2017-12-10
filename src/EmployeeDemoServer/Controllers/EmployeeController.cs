@@ -35,6 +35,9 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
         [Route("")]
         public async Task<IHttpActionResult> Create(CreateEmployeeDto dto)
         {
+            if (dto == null)
+                return BadRequest("Empty request body");
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
