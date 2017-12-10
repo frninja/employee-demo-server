@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+
+using FluentValidation.WebApi;
 
 namespace SimpleCode.EmployeeDemoServer
 {
@@ -19,6 +18,8 @@ namespace SimpleCode.EmployeeDemoServer
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            FluentValidationModelValidatorProvider.Configure(config);
         }
     }
 }
