@@ -34,6 +34,7 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
         // TODO: Pass CreateDto argument.
         public async Task<IHttpActionResult> Create()
         {
+            // TODO: Validate input DTO.
             // TODO: Create employee using command object.
             Employee employee = null;
             return CreatedAtRoute("GetEmployeeById", new { id = employee.Id }, employee);
@@ -44,6 +45,7 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
         // TODO: Pass UpdateDto argument.
         public async Task<IHttpActionResult> Update(Guid id)
         {
+            // TODO: Validate input DTO.
             // TODO: Update employee using command object.
             Employee employee = null;
             return Ok(employee);
