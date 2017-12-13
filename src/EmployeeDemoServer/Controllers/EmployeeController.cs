@@ -6,10 +6,12 @@ using System.Web.Http;
 using SimpleCode.EmployeeDemoServer.Commands;
 using SimpleCode.EmployeeDemoServer.Dto;
 using SimpleCode.EmployeeDemoServer.Models;
+using SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters;
 
 namespace SimpleCode.EmployeeDemoServer.Controllers
 {
     //[Authorize]
+    [JsonApi]
     [RoutePrefix("api/employees")]
     public class EmployeeController : ApiController
     {
