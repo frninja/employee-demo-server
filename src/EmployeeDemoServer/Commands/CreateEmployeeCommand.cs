@@ -6,7 +6,7 @@ using SimpleCode.EmployeeDemoServer.Models;
 
 namespace SimpleCode.EmployeeDemoServer.Commands
 {
-    public class CreateEmployeeCommand
+    public class CreateEmployeeCommand : Command<Employee>
     {
         public string Name { get; }
         public string Email { get; }
@@ -21,7 +21,7 @@ namespace SimpleCode.EmployeeDemoServer.Commands
             Salary = salary;
         }
 
-        public async Task<Employee> Execute()
+        public override async Task<Employee> Execute()
         {
             Employee employee = new Employee(Guid.NewGuid(), Name, Email, BirthDay, Salary);
 
