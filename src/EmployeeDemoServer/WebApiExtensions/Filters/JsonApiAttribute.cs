@@ -12,7 +12,7 @@ namespace SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters
         public override async Task OnActionExecutingAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
         {
             var contentType = actionContext.Request.Content.Headers.ContentType;
-            if (string.Equals(contentType.MediaType, "application/json", System.StringComparison.InvariantCultureIgnoreCase))
+            if (!string.Equals(contentType.MediaType, "application/json", System.StringComparison.InvariantCultureIgnoreCase))
             {
                 actionContext.Response =
                     actionContext.Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "API supports JSON only.");
