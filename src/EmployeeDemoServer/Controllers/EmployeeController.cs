@@ -19,9 +19,10 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
     {
         [HttpGet]
         [Route("")]
-        public async Task<IHttpActionResult> GetAll(int pageSize = 10, int pageNumber = 1, string orderBy = "name")
+        public async Task<IHttpActionResult> GetAll(int pageSize = 10, int pageNumber = 1,
+                                                    string orderBy = "name", bool descending = false)
         {
-            GetAllEmployeesQuery query = new GetAllEmployeesQuery(pageSize, pageNumber, orderBy);
+            GetAllEmployeesQuery query = new GetAllEmployeesQuery(pageSize, pageNumber, orderBy, descending);
             var pagedEmployees = await query.Execute().ConfigureAwait(false);
             return Ok(pagedEmployees);
         }

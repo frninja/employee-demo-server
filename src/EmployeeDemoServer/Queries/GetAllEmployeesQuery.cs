@@ -15,8 +15,9 @@ namespace SimpleCode.EmployeeDemoServer.Queries
         public int PageNumber { get; }
 
         public string OrderBy { get; }
+        public bool Descending { get; }
 
-        public GetAllEmployeesQuery(int pageSize, int pageNumber, string orderBy)
+        public GetAllEmployeesQuery(int pageSize, int pageNumber, string orderBy, bool descending)
         {
             PageSize = pageSize;
             PageNumber = pageNumber;
@@ -32,7 +33,11 @@ namespace SimpleCode.EmployeeDemoServer.Queries
                 {
                     orderedKeySelector = keySelectors.First().Value;
                 }
-                return await new Paginator(PageSize).Paginate(context.Employees.OrderBy(orderedKeySelector), PageNumber)
+
+                var ordered = Descending ? context.Employees.OrderByDescending(orderedKeySelector)
+                                         : context.Employees.OrderBy(orderedKeySelector);
+
+                return await new Paginator(PageSize).Paginate(ordered, PageNumber)
                         .ConfigureAwait(false);
             }
         }
