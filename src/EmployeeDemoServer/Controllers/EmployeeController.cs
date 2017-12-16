@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+
+using AutoMapper;
 
 using SimpleCode.EmployeeDemoServer.Commands;
 using SimpleCode.EmployeeDemoServer.Dto;
 using SimpleCode.EmployeeDemoServer.Exceptions;
+using SimpleCode.EmployeeDemoServer.Mapping;
 using SimpleCode.EmployeeDemoServer.Models;
 using SimpleCode.EmployeeDemoServer.Queries;
 using SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters;
@@ -24,7 +26,7 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
         {
             GetAllEmployeesQuery query = new GetAllEmployeesQuery(pageSize, pageNumber, orderBy, descending);
             var pagedEmployees = await query.Execute().ConfigureAwait(false);
-            return Ok(pagedEmployees);
+            return Ok(pagedEmployees.Select(mapper.Map<Employee, EmployeeViewDto>));
         }
 
         [HttpGet]
@@ -36,7 +38,7 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
             {
                 Employee employee = await query.Execute().ConfigureAwait(false);
                 // TODO: Use AutoMapper to return ViewDTO.
-                return Ok(employee);
+                return Ok(mapper.Map<Employee, EmployeeViewDto>(employee));
             }
             catch (ObjectNotFoundException)
             {
@@ -80,5 +82,8 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
             // TODO: Remove employee using command object.
             return Ok();
         }
+
+
+        private IMapper mapper = AutoMapperConfiguration.Get().CreateMapper();
     }
 }

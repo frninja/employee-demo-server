@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpleCode.EmployeeDemoServer.Queries
 {
@@ -19,6 +21,12 @@ namespace SimpleCode.EmployeeDemoServer.Queries
 
             TotalItemsCount = totalItemsCount;
             Items = items;
+        }
+
+        public PagedItems<TResult> Select<TResult>(Func<T, TResult> selector)
+        {
+            return new PagedItems<TResult>(PageSize, PageNumber, TotalPagesCount, TotalItemsCount,
+                                           Items.Select(selector));
         }
     }
 }
