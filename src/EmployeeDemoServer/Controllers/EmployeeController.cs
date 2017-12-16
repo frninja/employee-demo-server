@@ -5,7 +5,9 @@ using System.Web.Http;
 
 using SimpleCode.EmployeeDemoServer.Commands;
 using SimpleCode.EmployeeDemoServer.Dto;
+using SimpleCode.EmployeeDemoServer.Exceptions;
 using SimpleCode.EmployeeDemoServer.Models;
+using SimpleCode.EmployeeDemoServer.Queries;
 using SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters;
 
 namespace SimpleCode.EmployeeDemoServer.Controllers
@@ -28,9 +30,17 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
         [Route("{id}", Name="GetEmployeeById")]
         public async Task<IHttpActionResult> GetById(Guid id)
         {
-            // TODO: Get employee using query object.
-            Employee employee = null;
-            return Ok(employee);
+            GetEmployeeByIdQuery query = new GetEmployeeByIdQuery(id);
+            try
+            {
+                Employee employee = await query.Execute().ConfigureAwait(false);
+                // TODO: Use AutoMapper to return ViewDTO.
+                return Ok(employee);
+            }
+            catch (ObjectNotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]
