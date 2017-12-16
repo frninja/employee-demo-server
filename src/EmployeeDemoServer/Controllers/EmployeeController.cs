@@ -37,7 +37,6 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
             try
             {
                 Employee employee = await query.Execute().ConfigureAwait(false);
-                // TODO: Use AutoMapper to return ViewDTO.
                 return Ok(mapper.Map<Employee, EmployeeViewDto>(employee));
             }
             catch (ObjectNotFoundException)
