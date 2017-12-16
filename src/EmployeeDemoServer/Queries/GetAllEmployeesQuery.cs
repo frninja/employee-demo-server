@@ -9,7 +9,7 @@ using SimpleCode.EmployeeDemoServer.Models;
 
 namespace SimpleCode.EmployeeDemoServer.Queries
 {
-    public class GetAllEmployeesQuery
+    public class GetAllEmployeesQuery : Query<PagedItems<Employee>>
     {
         public int PageSize { get; }
         public int PageNumber { get; }
@@ -24,7 +24,7 @@ namespace SimpleCode.EmployeeDemoServer.Queries
             OrderBy = orderBy;
         }
 
-        public async Task<PagedItems<Employee>> Execute()
+        public override async Task<PagedItems<Employee>> Execute()
         {
             using (EmployeeContext context = new EmployeeContext())
             {

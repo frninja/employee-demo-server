@@ -7,7 +7,7 @@ using SimpleCode.EmployeeDemoServer.Models;
 
 namespace SimpleCode.EmployeeDemoServer.Queries
 {
-    public class GetEmployeeByIdQuery
+    public class GetEmployeeByIdQuery : Query<Employee>
     {
         public Guid Id { get; }
 
@@ -16,7 +16,7 @@ namespace SimpleCode.EmployeeDemoServer.Queries
             Id = id;
         }
 
-        public async Task<Employee> Execute()
+        public override async Task<Employee> Execute()
         {
             using (EmployeeContext context = new EmployeeContext())
             {
