@@ -10,16 +10,12 @@ namespace SimpleCode.EmployeeDemoServer.Dto
     [Validator(typeof(CreateEmployeeDtoValidator))]
     public class CreateEmployeeDto
     {
-        [JsonRequired]
         public string Name { get; set; }
 
-        [JsonRequired]
         public string Email { get; set; }
 
-        [JsonRequired]
         public DateTime BirthDay { get; set; }
 
-        [JsonRequired]
         public int? Salary { get; set; }
     }
 
