@@ -121,7 +121,10 @@
     </Compile>
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GetAllEmployeesQuery.cs" />
     <Compile Include="Queries\GetEmployeeByIdQuery.cs" />
+    <Compile Include="Queries\PagedItems.cs" />
+    <Compile Include="Queries\Paginator.cs" />
     <Compile Include="WebApiExtensions\Filters\JsonApiAttribute.cs" />
   </ItemGroup>
   <ItemGroup>

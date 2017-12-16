@@ -19,11 +19,11 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
     {
         [HttpGet]
         [Route("")]
-        public async Task<IHttpActionResult> GetAll()
+        public async Task<IHttpActionResult> GetAll(int pageSize = 10, int pageNumber = 1, string orderBy = "name")
         {
-            // TODO: Get all employee using query object.
-            IEnumerable<Employee> employees = new Employee[0];
-            return Ok();
+            GetAllEmployeesQuery query = new GetAllEmployeesQuery(pageSize, pageNumber, orderBy);
+            var pagedEmployees = await query.Execute().ConfigureAwait(false);
+            return Ok(pagedEmployees);
         }
 
         [HttpGet]
