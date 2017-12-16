@@ -22,6 +22,7 @@ namespace SimpleCode.EmployeeDemoServer.Queries
             PageSize = pageSize;
             PageNumber = pageNumber;
             OrderBy = orderBy;
+            Descending = descending;
         }
 
         public override async Task<PagedItems<Employee>> Execute()
