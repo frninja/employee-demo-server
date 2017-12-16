@@ -116,8 +116,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CreateEmployeeCommand.cs" />
     <Compile Include="Commands\EditEmployeeCommand.cs" />
+    <Compile Include="Commands\RemoveEmployeeCommand.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Db\EmployeeContext.cs" />
     <Compile Include="Dto\CreateEmployeeDto.cs" />

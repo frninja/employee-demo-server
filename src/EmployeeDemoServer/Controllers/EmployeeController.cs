@@ -87,7 +87,8 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
         [Route("{id}")]
         public async Task<IHttpActionResult> Delete(Guid id)
         {
-            // TODO: Remove employee using command object.
+            RemoveEmployeeCommand command = new RemoveEmployeeCommand(id);
+            await command.Execute().ConfigureAwait(false);
             return Ok();
         }
 
