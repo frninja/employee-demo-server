@@ -65,13 +65,24 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        // TODO: Pass UpdateDto argument.
-        public async Task<IHttpActionResult> Update(Guid id)
+        public async Task<IHttpActionResult> Update(Guid id, EditEmployeeDto dto)
         {
-            // TODO: Validate input DTO.
-            // TODO: Update employee using command object.
-            Employee employee = null;
-            return Ok(employee);
+            if (dto == null)
+                return BadRequest("Empty request body");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            EditEmployeeCommand command = new EditEmployeeCommand(id, dto.Name, dto.Email, dto.BirthDay, dto.Salary);
+            try
+            {
+                Employee employee = await command.Execute().ConfigureAwait(false);
+                return Ok(mapper.Map<Employee, EmployeeViewDto>(employee));
+            }
+            catch (ObjectNotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         [HttpDelete]

@@ -117,9 +117,11 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Commands\CreateEmployeeCommand.cs" />
+    <Compile Include="Commands\EditEmployeeCommand.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Db\EmployeeContext.cs" />
     <Compile Include="Dto\CreateEmployeeDto.cs" />
+    <Compile Include="Dto\EditEmployeeDto.cs" />
     <Compile Include="Dto\EmployeeViewDto.cs" />
     <Compile Include="Exceptions\ObjectNotFoundException.cs" />
     <Compile Include="Global.asax.cs">
@@ -132,6 +134,7 @@
     <Compile Include="Queries\GetEmployeeByIdQuery.cs" />
     <Compile Include="Queries\PagedItems.cs" />
     <Compile Include="Queries\Paginator.cs" />
+    <Compile Include="Queries\Query.cs" />
     <Compile Include="WebApiExtensions\Filters\JsonApiAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
