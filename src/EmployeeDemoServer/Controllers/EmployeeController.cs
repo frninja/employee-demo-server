@@ -53,9 +53,7 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
                 return BadRequest("Empty request body");
 
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             CreateEmployeeCommand command = new CreateEmployeeCommand(dto.Name, dto.Email,
                                                                       dto.BirthDay, dto.Salary.Value);
