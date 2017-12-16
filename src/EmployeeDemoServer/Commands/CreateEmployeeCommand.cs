@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 
+using SimpleCode.EmployeeDemoServer.Db;
 using SimpleCode.EmployeeDemoServer.Models;
 
 namespace SimpleCode.EmployeeDemoServer.Commands
@@ -14,10 +16,16 @@ namespace SimpleCode.EmployeeDemoServer.Commands
             this.salary = salary;
         }
 
-        public Employee Execute()
+        public async Task<Employee> Execute()
         {
-            Employee employee = new Employee();
-            // TODO: Persist to DB using DbContext.
+            Employee employee = new Employee(Guid.NewGuid(), name, email, birthDay, salary);
+
+            using (EmployeeContext context = new EmployeeContext())
+            {
+                context.Employees.Add(employee);
+                await context.SaveChangesAsync().ConfigureAwait(false);
+            }
+
             return employee;
         }
 

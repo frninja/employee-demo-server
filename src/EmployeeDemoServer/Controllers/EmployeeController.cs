@@ -45,7 +45,9 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            Employee employee = new CreateEmployeeCommand(dto.Name, dto.Email, dto.BirthDay, dto.Salary.Value).Execute();
+            CreateEmployeeCommand command = new CreateEmployeeCommand(dto.Name, dto.Email,
+                                                                      dto.BirthDay, dto.Salary.Value);
+            Employee employee = await command.Execute().ConfigureAwait(false);
             return CreatedAtRoute("GetEmployeeById", new { id = employee.Id }, employee);
         }
 

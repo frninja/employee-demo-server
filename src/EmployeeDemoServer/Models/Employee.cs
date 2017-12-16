@@ -23,6 +23,16 @@ namespace SimpleCode.EmployeeDemoServer.Models
         [Required]
         public int Salary { get; set; }
 
-        public Employee() {}
+        public Employee(Guid id, string name, string email, DateTime birthDay, int salary)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            BirthDay = birthDay;
+            Salary = salary;
+        }
+
+        // Private constructor for ORM.
+        private Employee() {}
     }
 }
