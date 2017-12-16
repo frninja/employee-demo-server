@@ -8,17 +8,22 @@ namespace SimpleCode.EmployeeDemoServer.Commands
 {
     public class CreateEmployeeCommand
     {
+        public string Name { get; }
+        public string Email { get; }
+        public DateTime BirthDay { get; }
+        public int Salary { get; }
+
         public CreateEmployeeCommand(string name, string email, DateTime birthDay, int salary)
         {
-            this.name = name;
-            this.email = email;
-            this.birthDay = birthDay;
-            this.salary = salary;
+            Name = name;
+            Email = email;
+            BirthDay = birthDay;
+            Salary = salary;
         }
 
         public async Task<Employee> Execute()
         {
-            Employee employee = new Employee(Guid.NewGuid(), name, email, birthDay, salary);
+            Employee employee = new Employee(Guid.NewGuid(), Name, Email, BirthDay, Salary);
 
             using (EmployeeContext context = new EmployeeContext())
             {
@@ -28,11 +33,5 @@ namespace SimpleCode.EmployeeDemoServer.Commands
 
             return employee;
         }
-
-
-        private readonly string name;
-        private readonly string email;
-        private readonly DateTime birthDay;
-        private readonly int salary;
     }
 }
