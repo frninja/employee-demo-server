@@ -14,7 +14,8 @@ using SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters;
 
 namespace SimpleCode.EmployeeDemoServer.Controllers
 {
-    //[Authorize]
+    [BasicAuthentication]
+    [Authorize]
     [JsonApi]
     [RoutePrefix("api/employees")]
     public class EmployeeController : ApiController
