@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
 
+using SimpleCode.EmployeeDemoServer.Authentication;
 using SimpleCode.EmployeeDemoServer.WebApiExtensions.Results;
 
 namespace SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters
@@ -99,10 +100,12 @@ namespace SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters
 
         private async Task<IPrincipal> DoAuthenticateAsync(string userName, string password, CancellationToken cancellationToken)
         {
-            if (!(userName == "admin" && password == "admin"))
+            SimpleUserManager userManager = new SimpleUserManager();
+            User user = userManager.FindUser(userName, password);
+            if (user == null)
                 return null;
 
-            GenericIdentity identity = new GenericIdentity("admin", "Basic");
+            GenericIdentity identity = new GenericIdentity(user.UserName, "Basic");
             GenericPrincipal principal = new GenericPrincipal(identity, null);
 
             return principal;
