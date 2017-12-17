@@ -25,7 +25,7 @@ namespace SimpleCode.EmployeeDemoServer.WebApiExtensions.Results
             if (response.StatusCode != HttpStatusCode.Unauthorized)
                 return response;
 
-            if (!response.Headers.WwwAuthenticate.Any(h => h.Scheme == Challenge.Scheme))
+            if (response.Headers.WwwAuthenticate.Any(h => h.Scheme == Challenge.Scheme))
                 return response;
 
             response.Headers.WwwAuthenticate.Add(Challenge);
