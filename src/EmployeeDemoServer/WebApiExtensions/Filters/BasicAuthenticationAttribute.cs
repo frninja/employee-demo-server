@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http.Filters;
 
 using SimpleCode.EmployeeDemoServer.WebApiExtensions.Results;
-using System.Security.Principal;
 
 namespace SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters
 {
     public class BasicAuthenticationAttribute : Attribute, IAuthenticationFilter
     {
         public bool AllowMultiple => false;
+
+        public string Realm { get; set; }
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken) {
             HttpRequestMessage request = context.Request;
@@ -55,8 +54,9 @@ namespace SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters
             context.Principal = principal;
         }
 
-        public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken) {
-            throw new NotImplementedException();
+        public async Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken) {
+            AuthenticationHeaderValue challenge = CreateChallenge();
+            context.Result = new AddChallengeOnUnauthorizedResult(challenge, context.Result);
         }
 
 
@@ -106,6 +106,19 @@ namespace SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters
             GenericPrincipal principal = new GenericPrincipal(identity, null);
 
             return principal;
+        }
+
+        private AuthenticationHeaderValue CreateChallenge()
+        {
+            string parameter;
+            if (string.IsNullOrEmpty(Realm)) {
+                parameter = null;
+            }
+            else {
+                parameter = $"realm=\"{Realm}\"";
+            }
+
+            return new AuthenticationHeaderValue("Basic", parameter);
         }
     }
 }

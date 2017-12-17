@@ -139,6 +139,7 @@
     <Compile Include="Queries\Query.cs" />
     <Compile Include="WebApiExtensions\Filters\BasicAuthenticationAttribute.cs" />
     <Compile Include="WebApiExtensions\Filters\JsonApiAttribute.cs" />
+    <Compile Include="WebApiExtensions\Results\AddChallengeOnUnauthorizedResult.cs" />
     <Compile Include="WebApiExtensions\Results\AuthenticationFailureResult.cs" />
   </ItemGroup>
   <ItemGroup>
