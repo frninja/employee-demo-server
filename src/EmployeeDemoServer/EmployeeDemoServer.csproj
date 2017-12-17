@@ -137,7 +137,9 @@
     <Compile Include="Queries\PagedItems.cs" />
     <Compile Include="Queries\Paginator.cs" />
     <Compile Include="Queries\Query.cs" />
+    <Compile Include="WebApiExtensions\Filters\BasicAuthenticationAttribute.cs" />
     <Compile Include="WebApiExtensions\Filters\JsonApiAttribute.cs" />
+    <Compile Include="WebApiExtensions\Results\AuthenticationFailureResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
