@@ -2,9 +2,9 @@
 
 namespace SimpleCode.EmployeeDemoServer.Authentication
 {
-    public class UserManager
+    public class SimpleUserManager
     {
-        public UserManager()
+        public SimpleUserManager()
         {
             users = new List<User> { new User("admin", "admin") };
         }
