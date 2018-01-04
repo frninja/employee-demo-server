@@ -1,6 +1,8 @@
-﻿using Owin;
+﻿using System.Web.Http;
+
+using Owin;
 using Microsoft.Owin;
-using System.Web.Http;
+using Microsoft.Owin.Cors;
 
 [assembly: OwinStartup(typeof(SimpleCode.EmployeeDemoServer.Startup))]
 namespace SimpleCode.EmployeeDemoServer
@@ -12,6 +14,7 @@ namespace SimpleCode.EmployeeDemoServer
             HttpConfiguration config = new HttpConfiguration();
             WebApiConfig.Register(config);
 
+            app.UseCors(CorsOptions.AllowAll);
             app.UseWebApi(config);
         }
     }
