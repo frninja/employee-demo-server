@@ -12,7 +12,8 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
         [HttpPost]
         [Route("api/authenticate")]
         public async Task<IHttpActionResult> Authenticate() {
-            return Ok();
+            string token = Request.Headers.Authorization.Parameter;
+            return Ok(token);
         }
     }
 }
