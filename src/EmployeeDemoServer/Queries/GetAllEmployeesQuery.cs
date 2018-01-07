@@ -30,9 +30,9 @@ namespace SimpleCode.EmployeeDemoServer.Queries
             using (EmployeeContext context = new EmployeeContext())
             {
                 Expression<Func<Employee, object>> orderedKeySelector;
-                if (!keySelectors.TryGetValue(OrderBy.ToLower(), out orderedKeySelector))
+                if (OrderBy == null || !keySelectors.TryGetValue(OrderBy.ToLower(), out orderedKeySelector))
                 {
-                    orderedKeySelector = keySelectors.First().Value;
+                    orderedKeySelector = (e => e.Id.ToString());
                 }
 
                 var ordered = Descending ? context.Employees.OrderByDescending(orderedKeySelector)
