@@ -7,7 +7,7 @@ namespace SimpleCode.EmployeeDemoServer.Db
     public class EmployeeContext : DbContext
     {
         static EmployeeContext() {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EmployeeContext>());
+            Database.SetInitializer(new EmployeeDatabaseInitializer());
         }
 
 

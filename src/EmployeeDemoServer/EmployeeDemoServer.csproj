@@ -149,6 +149,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Db\EmployeeContext.cs" />
+    <Compile Include="Db\EmployeeDatabaseInitializer.cs" />
     <Compile Include="Dto\CreateEmployeeDto.cs" />
     <Compile Include="Dto\EditEmployeeDto.cs" />
     <Compile Include="Dto\EmployeeViewDto.cs" />
