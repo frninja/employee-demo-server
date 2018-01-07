@@ -10,7 +10,8 @@ namespace SimpleCode.EmployeeDemoServer.WebApiExtensions.Filters
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             var contentType = actionContext.Request.Content.Headers.ContentType;
-            if (!string.Equals(contentType.MediaType, "application/json", System.StringComparison.InvariantCultureIgnoreCase))
+            if (contentType == null ||
+                !string.Equals(contentType.MediaType, "application/json", System.StringComparison.InvariantCultureIgnoreCase))
             {
                 actionContext.Response =
                     actionContext.Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "API supports JSON only.");

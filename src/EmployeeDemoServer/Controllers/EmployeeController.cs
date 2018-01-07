@@ -16,7 +16,6 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
 {
     [BasicAuthentication]
     [Authorize]
-    [JsonApi]
     [RoutePrefix("api/employees")]
     public class EmployeeController : ApiController
     {
@@ -46,6 +45,7 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
             }
         }
 
+        [JsonApi]
         [HttpPost]
         [Route("")]
         public async Task<IHttpActionResult> Create(CreateEmployeeDto dto)
@@ -62,6 +62,7 @@ namespace SimpleCode.EmployeeDemoServer.Controllers
             return CreatedAtRoute("GetEmployeeById", new { id = employee.Id }, employee);
         }
 
+        [JsonApi]
         [HttpPut]
         [Route("{id}")]
         public async Task<IHttpActionResult> Update(Guid id, EditEmployeeDto dto)
