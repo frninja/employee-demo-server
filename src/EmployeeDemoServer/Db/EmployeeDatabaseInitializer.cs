@@ -22,7 +22,7 @@ namespace SimpleCode.EmployeeDemoServer.Db
 
         private Employee GenerateEmployee() {
             string fullName = $"{firstNames.SelectRandom()} {lastNames.SelectRandom()}";
-            string email = $"{fullName.Replace(' ', '.').ToLower()}{random.Next(1000).ToString()}@{mailDomens.SelectRandom()}";
+            string email = $"{fullName.Replace(' ', '.').ToLower()}{random.Next(1000).ToString()}@{mailDomains.SelectRandom()}";
             DateTime birthDay = DateTimeExtensions.GetRandomDate(new DateTime(1950, 01, 01), new DateTime(2000, 01, 01));
 
             return new Employee(Guid.NewGuid(), fullName, email, birthDay, random.Next(35000, 200000));
@@ -30,7 +30,7 @@ namespace SimpleCode.EmployeeDemoServer.Db
 
         private readonly string[] firstNames = new[] { "Oleg", "Amida", "Platon", "Alexander", "Ivan", "Sergey" };
         private readonly string[] lastNames = new[] { "Batashov", "Gavrilov", "Fedorovsky", "Khovanskyi" };
-        private readonly string[] mailDomens = new[] { "gmail.com", "ya.ru", "mail.ru" };
+        private readonly string[] mailDomains = new[] { "gmail.com", "ya.ru", "mail.ru" };
 
         private Random random = new Random((int)DateTime.UtcNow.Ticks);
     }
