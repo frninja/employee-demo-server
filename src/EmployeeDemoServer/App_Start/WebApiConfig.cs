@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 
 using FluentValidation.WebApi;
+using Newtonsoft.Json.Serialization;
 
 namespace SimpleCode.EmployeeDemoServer
 {
@@ -9,6 +10,8 @@ namespace SimpleCode.EmployeeDemoServer
         public static void Register(HttpConfiguration config)
         {
             // Конфигурация и службы веб-API
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
 
             // Маршруты веб-API
             config.MapHttpAttributeRoutes();
