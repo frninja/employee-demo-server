@@ -34,12 +34,12 @@ namespace SimpleCode.EmployeeDemoServer.Queries
 
 
         private IOrderedQueryable<Employee> SortBy(IQueryable<Employee> employees, string orderBy, bool descending) {
-            switch (orderBy) {
+            switch (orderBy.ToLower()) {
                 case "name":
                     return descending ? employees.OrderByDescending(e => e.Name) : employees.OrderBy(e => e.Name);
                 case "email":
                     return descending ? employees.OrderByDescending(e => e.Email) : employees.OrderBy(e => e.Email);
-                case "birthDay":
+                case "birthday":
                     return descending ? employees.OrderByDescending(e => e.BirthDay) : employees.OrderBy(e => e.BirthDay);
                 case "salary":
                     return descending ? employees.OrderByDescending(e => e.Salary) : employees.OrderBy(e => e.Salary);
