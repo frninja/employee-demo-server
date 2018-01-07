@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq;
 using System.Threading.Tasks;
 
 using SimpleCode.EmployeeDemoServer.Db;
@@ -29,28 +26,26 @@ namespace SimpleCode.EmployeeDemoServer.Queries
         {
             using (EmployeeContext context = new EmployeeContext())
             {
-                Expression<Func<Employee, object>> orderedKeySelector;
-                if (OrderBy == null || !keySelectors.TryGetValue(OrderBy.ToLower(), out orderedKeySelector))
-                {
-                    orderedKeySelector = (e => e.Id.ToString());
-                }
+                IOrderedQueryable<Employee> ordered = SortBy(context.Employees, OrderBy, Descending);
 
-                var ordered = Descending ? context.Employees.OrderByDescending(orderedKeySelector)
-                                         : context.Employees.OrderBy(orderedKeySelector);
-
-                return await new Paginator(PageSize).Paginate(ordered, PageNumber)
-                        .ConfigureAwait(false);
+                return await new Paginator(PageSize).Paginate(ordered, PageNumber).ConfigureAwait(false);
             }
         }
 
 
-        private static readonly Dictionary<string, Expression<Func<Employee, object>>> keySelectors =
-            new Dictionary<string, Expression<Func<Employee, object>>>
-            {
-                { "name", e => e.Name },
-                { "email", e => e.Email },
-                { "birthDay", e => e.BirthDay },
-                { "salary", e => e.Salary },
-            };
+        private IOrderedQueryable<Employee> SortBy(IQueryable<Employee> employees, string orderBy, bool descending) {
+            switch (orderBy) {
+                case "name":
+                    return descending ? employees.OrderByDescending(e => e.Name) : employees.OrderBy(e => e.Name);
+                case "email":
+                    return descending ? employees.OrderByDescending(e => e.Email) : employees.OrderBy(e => e.Email);
+                case "birthDay":
+                    return descending ? employees.OrderByDescending(e => e.BirthDay) : employees.OrderBy(e => e.BirthDay);
+                case "salary":
+                    return descending ? employees.OrderByDescending(e => e.Salary) : employees.OrderBy(e => e.Salary);
+                default:
+                    return descending ? employees.OrderByDescending(e => e) : employees.OrderBy(e => e);
+            }
+        }
     }
 }
