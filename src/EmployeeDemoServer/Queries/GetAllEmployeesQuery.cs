@@ -44,7 +44,7 @@ namespace SimpleCode.EmployeeDemoServer.Queries
                 case "salary":
                     return descending ? employees.OrderByDescending(e => e.Salary) : employees.OrderBy(e => e.Salary);
                 default:
-                    return descending ? employees.OrderByDescending(e => e) : employees.OrderBy(e => e);
+                    return descending ? employees.OrderByDescending(e => e.Id) : employees.OrderBy(e => e.Id);
             }
         }
     }
